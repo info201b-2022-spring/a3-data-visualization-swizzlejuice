@@ -24,7 +24,7 @@ state_ratio_table<-select(
 #2how many times did the ratio of black to white prison population exceed 1 over the years across all counties?
 sum(numbers_one$race_ratio > 1.00,na.rm="TRUE")
 
-#3in what county was the ratio of black to white total prison population the greatest?
+#3In what county and state was the ratio of Black to White Total Prison Population the greatest?
 highest_ratio<-max(table_ratio$race_ratio[is.finite(table_ratio$race_ratio)],na.rm="TRUE")
 location_highest<-filter(
   table_ratio,
@@ -99,13 +99,13 @@ black_eightyfive_total<-sum(year_table$black_prison_pop,na.rm="TRUE")
 
 #5in what year and what county had the highest black prison population?
 #5in what year and what county had the highest white prison population?
-highest_black<-max(table_count$black_prison_pop,na.rm="TRUE")
+highest_black<-max(incarceration$black_prison_pop,na.rm="TRUE")
 location_highest_black<-filter(
   table_count,
   black_prison_pop==24818
 )
 
-highest_white<-max(table_count$white_prison_pop,na.rm="TRUE")
+highest_white<-max(incarceration$white_prison_pop,na.rm="TRUE")
 location_highest_white<-filter(
   table_count,
   white_prison_pop==9945
@@ -116,15 +116,14 @@ location_highest_white<-filter(
 #FIRSTCHART
 Year <- c(1975, 1985,1990, 2000, 2007, 2015)
 Population_Count <- c(5872,143167,181379,377525,492919,428963)
-plot(Year, Population_Count, type = "o",main="Black to White Prison Population 1970-2015")
-plot(data.frame(Year, Population_Count), type = "o",main="Black to White Prison Population 1970-2015") 
-plot(Year ~ Population_Count, type = "o",main="Black to White Prison Population 1970-2015") 
-plot(Year, Population_Count, type = "o", cex = 1, pch = 21, bg = "red", col = "blue",main="Black to White Prison Population 1970-2015")
+plot(Year, Population_Count, type = "o",main="Black to White Prison Population 1975-2015")
+#plot(data.frame(Year, Population_Count), type = "o",main="Black to White Prison Population 1970-2015") 
+#plot(Year ~ Population_Count, type = "o",main="Black to White Prison Population 1975-2015") 
 y2 <- c(3158, 128813, 136705, 280734, 437016,429037)
 # First line
-plot(Year,Population_Count, type = "o",main="Black to White Prison Population 1970-2015")
+plot(Year,Population_Count, type = "o",main="Black to White Prison Population 1975-2015")
 # Second line
-lines(x, y2, type = "o", col = 2,main="Black to White Prison Population 1970-2015")
+lines(Year, y2, type = "o", col = 2,main="Black to White Prison Population 1975-2015")
 legend(x = "topleft",          
        legend = c("White Prison Population", "Black Prison Population"),
        title="LEGEND",

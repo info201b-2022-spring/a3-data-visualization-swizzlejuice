@@ -1,0 +1,98 @@
+---
+title: 'Incarceration Trends'
+author: "Clarabelle McKeirnan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+For this assignment, I was asked to create a website that presents my analysis of the dataset Incarceration Trends.
+
+I chose to analyze a few variables. The first variable I calculated and analyzed was the ratio of the Black Prison Population (black_prison_pop) variable against the White Prison Population (white_prison_pop). The name of my ratio is race_ratio. I calculated the ratio by dividing the variables black_prison_pop / white_prison_pop. A ratio of over 1.00 suggests that there is a higher Black Prison Population than White Prison Population, and vice versa. 
+
+The next variables I analyzed was the black_prison_pop and white_prison_pop variables. I wanted to see how these variables correlated and changed over time, so I calculated the total White Prison Population and the total Black Prison Population over a timeframe of 1970-2018. I then used these two variables to compare data and created charts based off of these variables.
+
+The reason why I chose to analyze these variables was for the following reasons:
+
+1. race_ratio: I wanted to see how the ratio varied over time and by region. I was curious to see this because I wanted to better understand how injustices existed nationwide in incarceration rates of Black and White folk. I wanted to see how many regions and locations had a race_ratio > 1.00 so I could decide for myself if there was truly injustice alarmingly present.
+
+2. black_prison_pop, white_prison_pop: I wanted to see the total populations and how they varied geographically and by year, to really be able to see if there are injustices in incarceration rates between Black and White folk
+
+In summary, I chose these variables to analyze to better understand the trends, patterns, and numbers of Black Prisoners and White Prisoners. By creating graphs, it was evident to me that the rate of Black people being incarcerated is much higher than the rate for White people.
+
+## Dataset Analysis- 5 Values Calculated from the Dataset
+
+1: What was the Black to White Prison Population ratio across all counties over the years?
+
+-To do this, I added a column to the incarceration table that showed the ratio for each county. I created a new table called numbers_one to show this new column.
+
+
+2: How many times did the ratio of Black to White Prison Population exceed 1 over the years across all counties?
+
+-To do this, I calculated the sum of the (race_ratio > 1). The number of times there were more Black than White people in Prison was 15,494 (excluded NA values). This is out of a total of 153,811 values including NA values.
+
+
+3: In what county and state was the ratio of Black to White Total Prison Population the greatest?
+
+-The county and state with the highest ratio in any given year was Sunflower County, MS with a ratio of 46. 
+
+
+4: What was the total White Prison Population in the years 1975, 1985, 1990, 2000, 2007, and 2015?
+What was the total Black Prison Population in the years 1975, 1985, 1990, 2000, 2007, and 2015?
+
+
+-I chose to do this in order to create a graph that showed the trends in the Black and White Prison Populations over time to the present.
+
+
+5: In what year and what county was the highest Black Prison Population?
+In what year and what county was the highest White Prison Population?
+
+-In 1998, New York County, NY had the highest Black Prison Population. It was 24,818.
+In 1998, Los Angeles County, CA had the highest White Prison Population. It was 9,945.
+Interestingly, they both occurred in the same year. 
+
+
+I chose to calculate all of these values not just because they were instrumental to my charts/tables/graphs, but because I wanted to actually understand the dataset more thoroughly and see how patterns and trends emerged and varied over time. 
+
+## Plotting My Data
+
+My first chart is a line graph depicting the Black Prison Population versus the White Prison Population in the years 1975, 1985, 1990, 2000, 2007, 2015. I created this chart to show trends in Black and White Prison Population over time intervals since 1975. I wanted to see if there was a general pattern of there being many more Black people in prison than White people. Based on my graph (I compared the data from my chart to Pew Research, and they matched) i concluded that there are far more Black people in prison than White people, however that margin is beginning to decline in the past ten years. Currently, the number of Black people in prison is beginning to match the number of White people, although historically it was not so. The graph I created shows that while historically, Black people outnumbered White people in prison- that is beginning to change and is now hardly discernible.
+
+```{r,echo=FALSE}
+Year <- c(1975, 1985,1990, 2000, 2007, 2015)
+Population_Count <- c(5872,143167,181379,377525,492919,428963)
+plot(Year, Population_Count, type = "o",main="Black to White Prison Population 1975-2015")
+y2 <- c(3158, 128813, 136705, 280734, 437016,429037)
+plot(Year,Population_Count, type = "o",main="Black to White Prison Population 1975-2015")
+lines(Year, y2, type = "o", col = 2,main="Black to White Prison Population 1975-2015")
+legend(x = "topleft",          
+       legend = c("White Prison Population", "Black Prison Population"),
+       title="LEGEND",
+       title.col = "blue",
+       lty = c(1, 1),           
+       col = c(2, 1),           
+       lwd = 2)  
+```
+
+
+My second chart is a pie chart that shows the total Black Prison Population in comparison to the total Black Population in 2015 alone- both variables from the incarceration dataset. The variables are as follows: black_prison_pop, black_pop_15to64. I used a pie chart as comparison because I thought it would better show the portion of Black inmates in respect to the total Black Population 15-64 in 2015. I chose to use the year 2015 because I wanted to see if the numbers of Black inmates matched the nationwide trend of Black Prison numbers overall declining. Through my analysis of this dataset and through Pew Research and Vera Institute, it showed that Black Prison Populations are declining nationwide since around 2008. Therefore, in 2015, since the numbers of Black inmates nearly matches the number of White inmates, the number shouldn't have been striking (in the pie chart). My pie chart showed this to be true, and this is why I chose the year 2015 to analyze.
+
+
+```{r,echo=FALSE}
+x <- c(28229706,428963)
+labels <- c("Black Population", "Black Prison Population")
+pie(x, labels, main = "Black Prison Population Compared to Total Black Population (2015)", col = rainbow(length(x)))
+legend("bottomleft", c("Total Black Population","Total Black Prison Population"), cex = 0.8,
+       title="LEGEND",fill = rainbow(length(x))) 
+```
+
+
+## Conclusion
+
+To analyze the dataset, I chose to perform various calculations as summarized above. I chose each calculation based on my understanding of the dataset and because I wanted to understand patterns, trends, and minute details in the dataset. Through my analysis, it is evident to me that there is a substantial disparity in White and Black Incarceration trends.
+
