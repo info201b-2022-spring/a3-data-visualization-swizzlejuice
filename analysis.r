@@ -188,24 +188,19 @@ mapping_tab<-filter(
   state=="AL"
 )
 
-theme_set(theme_bw(base_size=16)) 
-us_states <- map_data("state")
-us_counties <- map_data("county")
-head(us_states)
-p + geom_polygon() +
-  guides(fill = FALSE)
-ratio_state <- mapping_tab %>% 
-  group_by(state) 
-ga_ratio<-ratio_state%>% drop_na()
+new_table<-filter(ratio_state,year=="2015")
+al_average<-mean(ratio_state$race_ratio,na.rm=TRUE)
+mapping_tab<-filter(
+  map_table,
+  year=="2015",
+  state=="CA"
+)
+ca_average<-mean(mapping_tab$race_ratio,na.rm=TRUE)
 
-state <- map_data("state")
 
-ca_map <- ggplot(data=alabama, mapping=aes(x=long, y=lat, group=group)) + 
-  coord_fixed(1.3) + 
-  geom_polygon(color="black", fill="gray") + 
-  geom_polygon(data=alabama_county, fill=NA, color="white") + 
-  geom_polygon(color="black", fill=NA) + 
-  ggtitle('Alabama Map with Counties') + 
-  theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank(),
-        axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank())
-ca_map
+x <- data.frame("Race_ratio" = c(1.789,1.044,1.839,2.922,.621,.273,.338,.617,2.569,.177,.882),
+                "state" = c("Al","FL","GA","MS","TX","OK","MO","TN","SC","AZ","CA"))
+str(x) 
+
+library(usmap)
+plot_usmap(data=x, values = 'Race_ratio')
